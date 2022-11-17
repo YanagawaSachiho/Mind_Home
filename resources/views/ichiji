@@ -1,0 +1,33 @@
+
+
+
+GOOD
+<a href="{{route('good.page','id'=>$post['id'])}}">-GOOD-</a>
+
+
+
+ OTHE
+<a href="{{route('other.page','id'=>$post['id'])}}">-OTHER-</a>
+
+
+
+BAD
+<a href="{{route('bad.page,['id'=>$post['id']])}}">-BAD-</a>
+
+
+
+Hiroba
+<a href="{{route('hiroba.page,['id'=>$post['id']])}}">-広場-</a>
+
+
+
+PROFOLE
+<a href="{{route('profile.page,['id'=>$post['id']])}}">-プロフィール-</a>
+
+
+投稿詳細ページのボタン
+
+<a href="(route('edit.post','[id'=>$post['id']])">編集</a>
+
+<a href="">削除</a>
+
