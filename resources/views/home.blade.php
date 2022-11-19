@@ -1,5 +1,10 @@
 @extends('layouts.layout')
 @section('content')
+<div>
+<a href="{{route('good.page')}}">[GOOD]</a>
+    <a href="{{route('other.page')}}">[OTHER]</a>
+    <a href="{{route('bad.page')}}">[BAD]</a>
+</div>
   <div>
     <table class='table'>
     @foreach($posts as $post)

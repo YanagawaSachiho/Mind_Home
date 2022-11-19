@@ -52,7 +52,7 @@ public function Createpost(Request $request){
 // public function postEditForm(int $postId){
 public function postEditForm(Post $post){
     
-       var_dump($post);
+    //    var_dump($post);
 //    $postedit=Post::where('id',$post)->get();
 //    var_dump($postedit);
 
@@ -61,13 +61,33 @@ public function postEditForm(Post $post){
     ]);
 }
 // ・編集内容SAVE
-public function postEdit(int $postId){
+public function postEdit(Post $post,Request $request){
 
+   
+
+    $post->category_id = $request->category_id;
+    $post->public = $request->public;
+    $post->comment = $request->comment;
+    $post->save();
     return redirect('/');
     
 }
 //投稿削除
-public function postDeleteForm(int $postId){
+// ・削除確認（後でモーダル）
+public function postDeleteForm(Post $post){
+
+    
+    return view('form/delet',[
+        'post'=>$post
+    ]);
+
+}
+// ・削除実行＆リダイレクト
+public function postDelete(Post $post,Request $request){
+
+    $post ->delete();
+    // $record ->delete();
+    return redirect('/');
 
 }
 

@@ -14,7 +14,6 @@
 <body>
     <header>
         <div id="app">
-     
                     @if(Auth::check())
                     <span class="my-navbar-item">{{ Auth::user()->name}}</span>
                     <a href="" id="logout" class="my-navbar-item">ログアウト</a>
@@ -33,6 +32,9 @@
                    @endif
         </div>
     </header>
+
+    <div><a href="{{route('home')}}">HOME</a></div>
+ 
     @yield('content')
 </body>
 </html>

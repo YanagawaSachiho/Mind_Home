@@ -1,13 +1,23 @@
+@extends('layouts.layout')
+@section('content')
 <h1>GOODs</h1>
-
-@foreach($posts as $post)
-    <a href="{{route('post_detail',['id'=>$post['id']])}}">
+<div>
+    <table class='table'>
+    @foreach($posts as $post)
     <ul>
-      <li>ユーザー名:</li>
-      <li>カテゴリー:OTHER
+    <a href="{{route('post_detail',['post'=>$post['id']])}}">
+      <li>ユーザー名:{{$name}}</li>
+      <li>カテゴリー:
+        GOOD
+        
+        
       </li>
       <li>投稿日時:{{$post['created_at']}}</li>
       <li>投稿内容:{{$post['comment']}}</li>
+    </a>
     </ul>
-</a>
 @endforeach
+  </div>
+</table>
+  <a href="{{route('create_post.form')}}">新規投稿</a>
+  @endsection

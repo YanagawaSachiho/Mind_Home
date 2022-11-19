@@ -24,8 +24,13 @@ class DisplayController extends Controller
         // $post=new Post;
         // $all=$post->all()->toArray(); 
         $all=Auth::user()->post->toArray();
+        $name=Auth::user()->name;
+    
+    
+
         return view('home',[
             'posts'=>$all,
+            'name'=>$name,
 
         ]);
 
@@ -33,52 +38,41 @@ class DisplayController extends Controller
 
         // 投稿詳細
      public function postDetail(Post $post){
-
-
-        //  $detail=Auth::user()->post->where('id',$post['id'])->get();
-        //  echo $post;
-        // $post= new Post;
-        // $user= new User;
-
-        // $name=$user->select('name')->get()->toArray();
-        // $postdetail=$post->where('id',$postId)->get()->toArray();
-        // $category_id=$post->where('id',$postId)->select('category_id')->get();
-
-        // var_dump($category_id);
-        // .'<br>';
-        // var_dump($name);
-
     
         return view('display/postdetail',[
             'post'=>$post,
-            // 'posts'=>$postdetail,
-            // 'name'=>$name,
         ]);
      }
 
     //  GOOD投稿一覧
-    public function Good(int $postId){
-        $post= new Post;
-        $good=$post->where('category',0)->get()->toArray();
+    public function Good(){
+        $all=Auth::user()->post->where('category_id',0)->toArray();
+        $name=Auth::user()->name;
+
         return view('display/good',
-        ['good'=>$good
+        ['posts'=>$all,
+        'name'=>$name,
         ]);
     }
     //  OTHER稿一覧
     public function Other(){
-        $post= new Post;
-        $other=$post->where('category',1)->get()->toArray();
+        $all=Auth::user()->post->where('category_id',1)->toArray();
+        $name=Auth::user()->name;
+
         return view('display/good',
-        ['other'=>$other
+        ['posts'=>$all,
+        'name'=>$name,
         ]);
     }
     //  BAD投稿一覧
     public function Bad(){
-        $post= new Post;
-        $bad=$post->where('category',2)->get()->toArray();
-       
-        return view('display/bad',
-        ['bad'=>$bad]);
+        $all=Auth::user()->post->where('category_id',2)->toArray();
+        $name=Auth::user()->name;
+
+        return view('display/good',
+        ['posts'=>$all,
+        'name'=>$name,
+        ]);
     }
 
 // 全ユーザーの投稿

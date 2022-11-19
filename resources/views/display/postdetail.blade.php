@@ -20,6 +20,6 @@
 
   <a href="{{route('postedit.form',['post'=>$post['id']])}}"><button type="submit">編集する</button></a>
 
-  <a href="{{}}"><button type="submit">削除する</button></a>
+  <a href="{{route('delet_check',['post'=>$post['id']])}}"><button type="submit">削除する</button></a>
   
 </div>
