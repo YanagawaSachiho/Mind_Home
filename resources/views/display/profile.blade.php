@@ -1,23 +1,10 @@
 
 <image>
-<p>ユーザー名：{{}}</p>
-<p>自己紹介：{{}}</p>
 
-@foreach
-<a href="">
-    <ul>
-      <li>ユーザー名:</li>
-      <li>カテゴリー:@if($post['category_id']==0)
-        GOOD
-        @elseif($post['category_id']=1)
-        Other
-        @else
-        Bad
-      @endif
-      </li>
-      <li>投稿日時:{{$post['created_at']}}</li>
-      <li>投稿内容:{{$post['comment']}}</li>
-    </ul>
-</a>
+<!-- 普通に取り出せない問題 -->
+@foreach($user as $user)
+
+{{$user['name']}}
+{{$user['profile']}}
+<a href="{{route('edit_profile',['user'=>$user['id']])}}"><button class="btn-edit">編集する</button></a>
 @endforeach
-<button type="submit">編集する</button>

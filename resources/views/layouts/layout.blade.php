@@ -14,9 +14,13 @@
 <body>
     <header>
         <div id="app">
+
                     @if(Auth::check())
                     <span class="my-navbar-item">{{ Auth::user()->name}}</span>
                     <a href="" id="logout" class="my-navbar-item">ログアウト</a>
+
+
+
                     <form id="logout-form" action="{{ route('logout')}}" method="POST" style="display: none;">
                         @csrf
                     </form>
@@ -26,6 +30,7 @@
                             document.getElementById('logout-form').submit();
                         });
                     </script>
+                 
                     @else
                     <a class="my-navbar-item" href="{{route('login')}}">ログイン</a>
                     <a class="my-navbar-item" href="{{route('register')}}">会員登録</a>
@@ -34,7 +39,7 @@
     </header>
 
     <div><a href="{{route('home')}}">HOME</a></div>
- 
     @yield('content')
+ 
 </body>
 </html>

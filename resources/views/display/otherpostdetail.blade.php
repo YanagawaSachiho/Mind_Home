@@ -1,6 +1,7 @@
 @extends('layouts.layout')
 @section('content')
 
+<div>
   <p></p>
   <ul>
   <li>ユーザー名{{$name}}</li> 
@@ -19,9 +20,6 @@
   {{$post['comment']}}
   </ul>
 
-  <a href="{{route('postedit.form',['post'=>$post['id']])}}"><button type="submit">編集する</button></a>
-
-  <a href="{{route('delet_check',['post'=>$post['id']])}}"><button type="submit">削除する</button></a>
   
 </div>
 @endsection

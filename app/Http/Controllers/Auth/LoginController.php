@@ -26,7 +26,14 @@ class LoginController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = RouteServiceProvider::HOME;
+    protected $redirectTo = '/';
+    // protected $redirectTo = RouteServiceProvider::HOME;
+
+    // public function redirectPath(){
+        // 元居たページの取得↓
+    //     $path=\Session::pull('url.intneed');
+    //     return $path;
+    // }
 
     /**
      * Create a new controller instance.

@@ -1,5 +1,6 @@
 @extends('layouts.layout')
 @section('content')
+
 <table class="table">
   <ul>
   @foreach($all_user as $all_user)
