@@ -86,21 +86,28 @@ class DisplayController extends Controller
 
 // 全ユーザーの投稿
 public function Hiroba(){
+    // インスタンス
     $post=new Post;
-    $allpost=$post->all();
-    // $user_id=$post->user_id;
     $user=new User;
-    $alluser=$user->id;
+    // publicが1（公開）のみを取得
+    $allpost=$post->where('public',1)->get();
+    // ログインユーザーかその他か判断のためのid取得
+    $user_id=$post->user_id;
+    $id=$user->get();
 
-    // echo'USERID＝'.$user_id;
-   
+    // foreach($user_id as $id) {
+    //     $alluser=$user->where('id',$user_id)->get();
+    // }
+
+    // var_dump($alluser);
+
+
     // Quser_idと一致する名前を表示したい
     
-    // $use_name=$user->all();
-var_dump($alluser);
     return view('display/hiroba',[
         'post'=>$allpost,
-        'user'=>$alluser,
+        // 'user'=>$alluser,
+        // 'name'=>$name,
     ]);
 
     }
@@ -113,9 +120,10 @@ var_dump($alluser);
     $user=new User;
     $user_id=$post->user_id;
 
-    $name=$user->select('name')->where('id',$user_id)->get();
+    $name=$user->where('id',$user_id)->get();
     // $name=mb_convert_kana($name,"UTF-8");
     var_dump($name);
+    
 
     // ログインユーザーとuser_idが一致したら編集可能画面へ
         if($user_id===$myid){

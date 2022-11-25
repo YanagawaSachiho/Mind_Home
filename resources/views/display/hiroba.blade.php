@@ -2,11 +2,10 @@
 @section('content')
 
 @foreach($post as $post)
+
 <div class="border">
   <a href="{{route('allpost_detail',['post'=>$post['id']])}}">
-    <p>ポストIDは{{$post['id']}}</p>
-    <p>ユーザーIDは{{$post['user_id']}}</p>
-    </li> 
+    
     <li>カテゴリー:@if($post['category_id']==0)
       GOOD
       @elseif($post['category_id']=1)

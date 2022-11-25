@@ -4,8 +4,9 @@
 <div>
   <p></p>
   <ul>
-  <li>ユーザー名{{$name}}</li> 
-  
+    @foreach($name as $name)
+    <li>ユーザー名{{$name['name']}}</li> 
+    @endforeach
 
   <li>カテゴリー:@if($post['category_id']==0)
         GOOD
@@ -19,6 +20,7 @@
   <li>投稿内容</li>
   {{$post['comment']}}
   </ul>
+  <a href="{{route('bookmarkadd.page',['post'=>$post['id']])}}"><button >♡</button></a>
 
   
 </div>

@@ -2,7 +2,7 @@
 <div>
   <p></p>
   <ul>
-  <li>ユーザー名</li> 
+  <li>ユーザー名{{$name}}</li> 
   
 
   <li>カテゴリー:@if($post['category_id']==0)

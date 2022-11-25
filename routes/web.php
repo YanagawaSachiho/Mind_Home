@@ -53,12 +53,20 @@ Route::get('/edit_profile/{user}', [profileController::class,'editProfileForm'])
 Route::post('/edit_profile/{user}', [profileController::class,'editProfile'])->name('edit_profile');
 // プロフィールページ(他人）へ
     Route::get('/other_profile/{id}', [DisplayController::class,'otherProfile'])->name('other_profile.page');
-
-// ブックマーク一覧
+    
+    // ブックマーク一覧
+    Route::get('/bookmark', [UsersController::class,'bookmark'])->name('bookmark.page');
+    // bookmark追加
+    Route::get('/bookmarkadd/{post}', [UsersController::class,'bookmarkAdd'])->name('bookmarkadd.page');
+    // bookmark削除
+    Route::get('/bookmarkdelete/{post}', [UsersController::class,'bookmarkDelete'])->name('bookmarkdelete.page');
 
 // 【管理者ページ】
-
 // ユーザー一覧
 Route::get('/all_user',[UsersController::class,'allUser']);
+//ユーザー削除（確認）ボタン
+Route::get('/delete_user/{user}',[UsersController::class,'userDeleteForm'])->name('delete.user');
+//ユーザー削除（確認）ボタン
+Route::post('/delete_user/{user}',[UsersController::class,'userDelete'])->name('delete.user');
 
 });

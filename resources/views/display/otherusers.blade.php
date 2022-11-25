@@ -18,5 +18,6 @@
       <li>投稿日時:{{$post['created_at']}}</li>
       <li>投稿内容:{{$post['comment']}}</li>
     </ul>
+    
 </a>
 @endforeach

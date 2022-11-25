@@ -22,15 +22,22 @@ class ProfileController extends Controller
         // var_dump($user);
         // echo $userId;
         
+        $name=$user->get('name');
+        $profile=$user->get('profile');
+        $id=$user->get('id');
+        var_dump($name);
+        // echo$name;
         return view('display/profile',[
             'user'=>$user,
+            'name'=>$name,
+            'profile'=>$profile,
+            'id'=>$id,
 
         ]);
     }
     // ユーザープロフィール編集
     public function editProfileForm(User $user){
         
-        // var_dump($user);
         return view('form/edit_profile',[
             'user'=>$user,
             
@@ -38,9 +45,22 @@ class ProfileController extends Controller
     }
     public function editProfile(User $user,Request $request){
 
- 
+// 画像アップロード部分
+if(!empty($request->file('image'))){
 
-  
+
+    // ディレクトリ名
+    $dir = 'sample';
+    // ファイル名をそのまま取得（getClientOriginalName）
+    $file_name = $request->file('image')->getClientOriginalName();
+
+    // sampleディレクトリに画像を保存(storeで指定するとディレクトリもnewされる)
+    $request->file('image')->storeAs('public/' . $dir,$file_name);
+    // ↓'store～$file_nameに既にrequestメソッド含まれているはずだからそのまま保存可能
+    $user->image = 'storage/' . $dir . '/' . $file_name;
+// 画像ここまで
+}
+
     $user->name=$request->name;
     $user->profile =$request->profile;
 

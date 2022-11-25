@@ -9,7 +9,9 @@
  <li>メールアドレス{{$all_user['email']}}</li>
  <li>プロフィール{{$all_user['plofile']}}</li>
 </a>
-<a href=""> <buttum class="btn-warning">削除</buttum></a>
+<a href="route('delete.user',['user'=>$all_user['id']]"> 
+  <buttum class="btn-warning">削除</buttum>
+</a>
   @endforeach
 </ul>
 </table>
