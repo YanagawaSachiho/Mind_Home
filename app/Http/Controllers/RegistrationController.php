@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use App\User;
 use App\Mark;
 use App\Post;
+use DB;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -18,12 +19,8 @@ class RegistrationController extends Controller
   
     $open='公開';
     $close='非公開';
-
-
     return view('form/create_post',
     ['post'=>$post['id'],
-
-
 ]);
 
  }
@@ -91,5 +88,75 @@ public function postDelete(Post $post,Request $request){
 
 }
 
+// 検索フォーム
+ //・HOME検索フォーム
+    public function MySearchForm(){
+        $user=Auth::user()->get();
+        return view('form/search_form',[
+            'user'=>$user,
+        ]);
+    }
+ //・Hiroba検索フォーム
+    public function AllSearchForm(){
+        $user=Auth::user()->get();
+        return view('form/allsearch_form',[
+            'user'=>$user,
+        ]);
+    }
+// 検索結果表示（Home）
+public function Search(Request $request){
+  
+    $user=Auth::user()->id;
+    $name=Auth::user()->name;
+    $search=$request->search;
+    $post_inst=new Post;
+
+    // post全体からキーワードを含む投稿を表示
+
+    if(!empty($search)){
+        $post=$post_inst
+        ->where('comment','LIKE',"%{$search}%")
+        //自分の投稿に限定する
+        ->where('user_id',$user)
+        ->get();
+    }
+
+//  if(!empty($search)){
+//     $post=DB::table('users')
+//     ->join('users','users.id','=','posts','posts.user_id')
+//     ->where('comment','LIKE',"%{$search}%")
+//         //自分の投稿に限定する
+//         ->where('user_id',$user)
+//         ->get();
+//  }
+ echo$post;
+return view('form/search',[
+    'post'=>$post,  
+    'name'=>$name,
+]);
+
+}
+// 検索結果表示（Hiroba）
+public function AllSearch(Request $request){
+  
+    $users=new User;
+    // $user=$users->get();
+    $search=$request->search;
+    $post_inst=new Post;
+// 渡すところまではOK
+    // post全体からキーワードを含む投稿を表示
+
+    if(!empty($search)){
+        $post=$post_inst
+        ->where('comment','LIKE',"%{$search}%")
+        ->get();
+       };
+
+return view('form/allsearch',[
+    'post'=>$post,  
+    // 'users'=>$user,
+]);
+
+}
 //
 }

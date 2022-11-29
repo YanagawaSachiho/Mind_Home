@@ -47,7 +47,7 @@
       <a href="{{route('hiroba.page')}}">広場へ</a>
     </div>
     <div>
-      <a href="">検索</a>
+      <a href="{{route('allsearch_form')}}">検索</a>
     </div>
     <div>
       <a href="{{route('bookmark.page')}}">ブックマーク一覧へ</a>

@@ -1,8 +1,12 @@
 @extends('layouts.layout')
 @section('content')
 
- 
-  <ul>
+<!-- 検索フォーム -->
+
+
+
+<ul>
+  @foreach($post as $post)
     
     <li>ユーザー名{{$name}}</li> 
   
@@ -26,4 +30,5 @@
   <a href="{{route('delet_check',['post'=>$post['id']])}}"><button type="submit">削除する</button></a>
   
 </div>
+@endforeach
 @endsection

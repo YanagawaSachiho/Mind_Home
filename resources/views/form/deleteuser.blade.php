@@ -8,5 +8,5 @@
  <li>プロフィール{{$user['plofile']}}</li>
 </table>
 
-<a href="{{route('delet.user',['user'=>$user['id']])}}"><button class="btn btn-warning">削除する</button></a>
+<a href="{{route('deleteuser',['user'=>$user['id']])}}"><button class="btn btn-warning">削除する</button></a>
 @endsection

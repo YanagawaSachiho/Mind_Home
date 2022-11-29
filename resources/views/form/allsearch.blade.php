@@ -1,12 +1,14 @@
 @extends('layouts.layout')
 @section('content')
 
- 
-  <ul>
-    
-    <li>ユーザー名{{$name}}</li> 
-  
+<!-- 検索フォーム -->
 
+
+
+
+
+@foreach($post as $post)
+<ul>
   <li>カテゴリー:@if($post['category_id']==0)
         GOOD
         @elseif($post['category_id']=1)
@@ -20,10 +22,5 @@
   {{$post['comment']}}
   </ul>
   <a href="{{route('bookmarkadd.page',['post'=>$post['id']])}}"><button >♡</button></a>
-
-  <a href="{{route('postedit.form',['post'=>$post['id']])}}"><button type="submit">編集する</button></a>
-
-  <a href="{{route('delet_check',['post'=>$post['id']])}}"><button type="submit">削除する</button></a>
-  
-</div>
+@endforeach
 @endsection

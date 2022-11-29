@@ -65,8 +65,25 @@ Route::post('/edit_profile/{user}', [profileController::class,'editProfile'])->n
 // ユーザー一覧
 Route::get('/all_user',[UsersController::class,'allUser']);
 //ユーザー削除（確認）ボタン
-Route::get('/delete_user/{user}',[UsersController::class,'userDeleteForm'])->name('delete.user');
+Route::get('/delete_user/{user}',[UsersController::class,'userDeleteForm'])->name('deleteuser.form');
 //ユーザー削除（確認）ボタン
-Route::post('/delete_user/{user}',[UsersController::class,'userDelete'])->name('delete.user');
+Route::get('/delete_user_end/{user}',[UsersController::class,'userDelete'])->name('deleteuser');
 
+// 権限付与
+Route::post('/role/{user}',[UsersController::class,'userRole'])->name('role');
+// 【検索】
+// ・Home検索
+    // 検索機能フォームへ
+    Route::get('/search_form',[RegistrationController::class,'MySearchForm'])->name('search_form');
+    // 検索結果
+    Route::get('/search',[RegistrationController::class,'Search'])->name('search');
+
+//・ Hiroba検索
+    // 検索機能フォームへ
+    Route::get('/allsearch_form',[RegistrationController::class,'AllSearchForm'])->name('allsearch_form');
+
+    Route::get('/allsearch',[RegistrationController::class,'AllSearch'])->name('allsearch');
 });
+
+
+// パスワードリセット

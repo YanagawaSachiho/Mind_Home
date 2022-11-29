@@ -7,6 +7,7 @@ use App\Mark;
 use App\Post;
 use Illuminate\Support\Facades\Auth;
 use Carbon\Carbon;
+use DB;
 
 class UsersController extends Controller
 {
@@ -34,34 +35,46 @@ class UsersController extends Controller
 // ・削除確認（後でモーダル）
     public function userDeleteForm(User $user){
 
+        // dd($user);
+
         
         return view('form/deleteuser',[
-            'user'=>$user
+            'user'=>$user,
         ]);
 
     }
     // ・削除実行＆リダイレクト
-    public function userDelete(user $user,Request $request){
-
+    public function userDelete(user $user){
+        
         $user ->delete();
         // $record ->delete();
         return redirect('/');
-
+        
     }
+    public function userRole(user $user,Request  $request){
+        // formで送信したユーザー権限をusersテーブルのroleにeditする
+        $user->role = $request->role;
+        $user->save();
+        return redirect('/');
+    }
+
 
 
 
     // ブックマーク一覧
 
     public function bookmark(){
-       
-        $users = Auth::User('users')
-        ->join('marks', 'users.id', '=', 'marks.user_id')
-        ->join('posts', 'users.id', '=', 'posts.user_id')
+       $user_id=Auth::user()->id;
+        $users = DB::table('marks')
+        ->join('users', 'users.id', '=', 'marks.user_id')
+        ->join('posts', 'posts.id', '=', 'marks.post_id')
         ->select('users.*', 'marks.*', 'posts.*')
+        // 自分がbookmarkしたもの↓
+        ->where('marks.user_id','=',$user_id)
         ->get();
+// Qbookmarkしたpostの投稿者名を取得したい・・・・
 
-
+     
         return view('display/bookmark',[
         'users'=>$users,
        
@@ -70,18 +83,38 @@ class UsersController extends Controller
     // ブックマーク登録
     public function bookmarkAdd(Post $post){
         
-        $mark=new Mark;
+    $mark=new Mark;
     $user_id=Auth::user()->id;
+    
     foreach($post as $id){
         $post_id=$post['id'];
     }
 
-//    dd($post_id);
+    $marked=$mark
+    ->where('user_id',$user_id)
+    ->where('post_id',$post_id)
+    ->first();
 
-    // ボタンを押したらMarkテーブルにユーザーIDとPostIDが登録される
+    if(empty($marked)){
+        echo'markで決ます';
+      // ボタンを押したらMarkテーブルにユーザーIDとPostIDが登録される
     $mark->user_id = $user_id;
     $mark->post_id = $post_id;
     $mark->save();
-    return redirect('/');
+
+    }else{
+        
+    $marked->delete();
+
+        echo'もうできません';
+        var_dump($marked);
+        // dd($marked);
+        
+        
+
+}
+
+return redirect('/');
+
     }
 }

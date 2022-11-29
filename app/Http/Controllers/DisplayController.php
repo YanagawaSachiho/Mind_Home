@@ -28,17 +28,21 @@ class DisplayController extends Controller
         $name=Auth::user()->name;
         $role=Auth::user()->role;
         var_dump($role);
-        if($role===0){
-            return view('home',[
-                'posts'=>$all,
-                'id'=>$id,
-                'name'=>$name,
-    
-            ]);
-        }else{  
-      
-            return redirect('/all_user');
-            }
+        if(empty($all)){
+            return redirect('/create_post');
+            
+        }else{
+            if($role===0){
+                return view('home',[
+                    'posts'=>$all,
+                    'id'=>$id,
+                    'name'=>$name,
+                ]);
+            }else{  
+                return redirect('/all_user');
+                
+                }
+        }
 
         }
 
