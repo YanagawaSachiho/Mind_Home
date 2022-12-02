@@ -72,49 +72,72 @@ class UsersController extends Controller
         // 自分がbookmarkしたもの↓
         ->where('marks.user_id','=',$user_id)
         ->get();
-// Qbookmarkしたpostの投稿者名を取得したい・・・・
 
-     
         return view('display/bookmark',[
         'users'=>$users,
        
         ]);
     }
-    // ブックマーク登録
-    public function bookmarkAdd(Post $post){
-        
-    $mark=new Mark;
+    // ブックマーク登録  ajax処理はここに書く
+    public function ajaxMark(Request $request){
     $user_id=Auth::user()->id;
-    
-    foreach($post as $id){
-        $post_id=$post['id'];
-    }
+    $mark=new Mark;
 
+// viewでpost_idがnameになっているから
+$post_id=$request->post_id;
+    // 自分がブックマークした物の中から該当を絞り込む
     $marked=$mark
     ->where('user_id',$user_id)
     ->where('post_id',$post_id)
     ->first();
-
+    // もしまだbookmarkされていなかったらレコードを追加
     if(empty($marked)){
-        echo'markで決ます';
-      // ボタンを押したらMarkテーブルにユーザーIDとPostIDが登録される
-    $mark->user_id = $user_id;
-    $mark->post_id = $post_id;
-    $mark->save();
-
+        // レコードの有無判断
+        $record=true;
+        // ボタンを押したらMarkテーブルにユーザーIDとPostIDが登録される
+        $mark->user_id = $user_id;
+        $mark->post_id = $post_id;
+        $mark->save();       
     }else{
-        
+        // もしすでにbookmarkがあるなら
+     $record=false;
     $marked->delete();
+}
+$json=[
+    'marked'=>$marked,
+    'record'=>$record,
+];
+// return redirect('/');
+        //下記の記述でajaxに引数の値を返す
+        return response()->json($json);
+    }
 
-        echo'もうできません';
-        var_dump($marked);
-        // dd($marked);
-        
-        
+
+//ブックマーク一覧からの削除
+public function bookmarkDelete(Post $post){
+    $user_id=Auth::user()->id;
+    $mark=new Mark;
+
+    // 該当のpost_id投稿のあるレコードをmarkから削除
+    foreach($post as $id){
+        $post_id=$post['id'];
+    }
+
+    // 自分がブックマークした物の中から該当を絞り込む
+    $marked=$mark
+    ->where('user_id',$user_id)
+    ->where('post_id',$post_id)
+    ->first();
+    $marked->delete();
+    return redirect('/');
 
 }
 
-return redirect('/');
 
-    }
+
+    public function Passwordreset(){
+        // 自作
+   
+        return view('auth/password');
+   }
 }

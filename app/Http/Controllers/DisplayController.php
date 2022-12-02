@@ -48,12 +48,37 @@ class DisplayController extends Controller
 
         // 投稿詳細
      public function postDetail(Post $post){
-    
+         // ajaxの発火前の表示判断
+        $mark_model=new Mark;
+        $mark=$mark_model->get();
+
+       
+        $user_id=Auth::user()->id;
+        $post_id=$post->id;
+       
+        $record=$mark_model
+        ->where('user_id',$user_id)
+        ->where('post_id',$post_id)
+        ->first();
+        var_dump($record);
+        if($record==null){
+            $record=true;
+        }else{
+            $record=false;
+        }
+
         $name=Auth::user()->name;
-        echo$name;
+        $id=Auth::user()->id;
+        $post_id=$post->id;
+       
+
+
+
         return view('display/postdetail',[
             'post'=>$post,
             'name'=>$name,
+            'record'=>$record,
+        
         ]);
      }
      
@@ -72,7 +97,7 @@ class DisplayController extends Controller
         $all=Auth::user()->post->where('category_id',1)->toArray();
         $name=Auth::user()->name;
 
-        return view('display/good',
+        return view('display/other',
         ['posts'=>$all,
         'name'=>$name,
         ]);
@@ -82,7 +107,7 @@ class DisplayController extends Controller
         $all=Auth::user()->post->where('category_id',2)->toArray();
         $name=Auth::user()->name;
 
-        return view('display/good',
+        return view('display/bad',
         ['posts'=>$all,
         'name'=>$name,
     ]);
@@ -108,7 +133,7 @@ public function Hiroba(){
 
     // Quser_idと一致する名前を表示したい
     
-    return view('display/hiroba',[
+    return view('hiroba',[
         'post'=>$allpost,
         // 'user'=>$alluser,
         // 'name'=>$name,
@@ -117,7 +142,7 @@ public function Hiroba(){
     }
     
     // 全ユーザーの投稿詳細
-    public function AllpostDetail(Post $post){
+    public function OtherpostDetail(Post $post){
     
         
     $myid=Auth::user()->id;
@@ -126,7 +151,7 @@ public function Hiroba(){
 
     $name=$user->where('id',$user_id)->get();
     // $name=mb_convert_kana($name,"UTF-8");
-    var_dump($name);
+   
     
 
     // ログインユーザーとuser_idが一致したら編集可能画面へ

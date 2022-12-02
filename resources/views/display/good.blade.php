@@ -1,23 +1,21 @@
 @extends('layouts.layout')
 @section('content')
-<h1>GOODs</h1>
-<div>
-    <table class='table'>
+<h1  class="text-center border  w-50 m-auto ">GOODs</h1>
+<div class='container border  rounded  p-2'>
     @foreach($posts as $post)
-    <ul>
-    <a href="{{route('post_detail',['post'=>$post['id']])}}">
-      <li>ユーザー名:{{$name}}</li>
-      <li>カテゴリー:
-        GOOD
-        
-        
-      </li>
-      <li>投稿日時:{{$post['created_at']}}</li>
-      <li>投稿内容:{{$post['comment']}}</li>
+    <a href="{{route('post_detail',['post'=>$post['id']])}}" class="p-1">
+      <div class="p-1 border rounded-top border-info">
+        <div class="d-inline">
+          <div class="p-2"><section>ユーザー名:{{$name}}</section></div>
+          <div class="p-2">カテゴリー:
+            GOOD
+          </div>
+          <div class="p-2 border text-dark">投稿内容:{{$post['comment']}}</div>
+          <div class="p-1 d-flex justify-content-end">投稿日時:{{$post['created_at']}}</div>
+          </div>
+      </div>
     </a>
-    </ul>
 @endforeach
   </div>
-</table>
   <a href="{{route('create_post.form')}}">新規投稿</a>
   @endsection

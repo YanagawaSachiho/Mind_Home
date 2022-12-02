@@ -21,7 +21,7 @@ Route::group(['middleware' => 'auth'],function(){
     // Route::get('layout',[DisplayController::class,'Layout']);
     
     // ホーム
-    Route::get('/',[DisplayController::class,'index'])->name('home');
+    Route::get('/',[DisplayController::class,'index'])->name('/');
     //    GOOD投稿一覧
     Route::get('/good', [DisplayController::class,'Good'])->name('good.page');
     Route::get('/other', [DisplayController::class,'Other'])->name('other.page');
@@ -31,7 +31,11 @@ Route::group(['middleware' => 'auth'],function(){
     
 // 投稿詳細
     Route::get('/post_detail/{post}',[DisplayController::class,'postDetail'])->name('post_detail');
-    Route::get('/allpost_detail/{post}',[DisplayController::class,'AllpostDetail'])->name('allpost_detail');
+    Route::get('/otherpost_detail/{post}',[DisplayController::class,'OtherpostDetail'])->name('otherpost_detail');
+
+      // ajax
+    //   Route::get('/', 'UsersController::class,Ajax')->name('post_detail');
+
 // 新規投稿
         Route::get('/create_post',[RegistrationController::class,'CreatepostForm'])->name('create_post.form');
         Route::post('/create_post',[RegistrationController::class,'Createpost'])->name('create_post.form');
@@ -52,14 +56,17 @@ Route::get('/profile/{user_id}', [profileController::class,'Profile'])->name('pr
 Route::get('/edit_profile/{user}', [profileController::class,'editProfileForm'])->name('edit_profile');
 Route::post('/edit_profile/{user}', [profileController::class,'editProfile'])->name('edit_profile');
 // プロフィールページ(他人）へ
-    Route::get('/other_profile/{id}', [DisplayController::class,'otherProfile'])->name('other_profile.page');
+    Route::get('/other_profile/{post}', [profileController::class,'otherProfile'])->name('other_profile.page');
     
     // ブックマーク一覧
     Route::get('/bookmark', [UsersController::class,'bookmark'])->name('bookmark.page');
     // bookmark追加
-    Route::get('/bookmarkadd/{post}', [UsersController::class,'bookmarkAdd'])->name('bookmarkadd.page');
-    // bookmark削除
+    Route::get('ajaxmark', [UsersController::class,'ajaxMark'])->name('bookmarkadd.page');
+    Route::post('ajaxmark', [UsersController::class,'ajaxMark'])->name('bookmarkadd.page');
+    // bookmark削除（一覧からの削除ボタン用）
     Route::get('/bookmarkdelete/{post}', [UsersController::class,'bookmarkDelete'])->name('bookmarkdelete.page');
+
+  
 
 // 【管理者ページ】
 // ユーザー一覧
@@ -87,3 +94,15 @@ Route::post('/role/{user}',[UsersController::class,'userRole'])->name('role');
 
 
 // パスワードリセット
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');

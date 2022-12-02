@@ -35,19 +35,36 @@ class ProfileController extends Controller
 
         ]);
     }
-    // ユーザープロフィール編集
+    // ユーザープロフィール(他）]
+public function otherProfile(Post $post){
+    // postのuser_idからプロフィールを取得
+// var_dump($post);
+$user=new User;
+foreach($post as $id){
+    $user_id=$post['user_id'];
+}
+// var_dump($user_id);
+
+$other_user=$user->where('id',$user_id)->get();
+// var_dump($other_user);
+
+return view('display/otherusers',[
+    'other_user'=>$other_user,
+]);
+}
+    // ユーザープロフィール(自分)
     public function editProfileForm(User $user){
         
         return view('form/edit_profile',[
             'user'=>$user,
-            
         ]);
     }
+
+
     public function editProfile(User $user,Request $request){
 
 // 画像アップロード部分
 if(!empty($request->file('image'))){
-
 
     // ディレクトリ名
     $dir = 'sample';

@@ -4,8 +4,8 @@
 <table class="table">
   <ul>
   @foreach($all_user as $all_user)
-  <a href="">
- <li>ユーザー名 {{$all_user['name']}}</li>
+
+ <a href="{{route('other_profile.page',['post'=>$all_user['id']])}}"><li>ユーザー名 {{$all_user['name']}}</li></a>
  <li>メールアドレス{{$all_user['email']}}</li>
  <li>プロフィール{{$all_user['plofile']}}</li>
 </a>

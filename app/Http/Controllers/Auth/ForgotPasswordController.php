@@ -1,5 +1,5 @@
 <?php
-
+//パスワードリセットリンクを含むメールを送信するロジックを含んでいます
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;

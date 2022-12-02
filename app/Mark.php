@@ -16,4 +16,8 @@ class Mark extends Model
     
         return $this->belongsToMany('App\User');
     }
+     //後でViewで使う、いいねされているかを判定するメソッド。
+     public function isMarkedBy($user): bool {
+        return Mark::where('user_id', $user->id)->where('post_id', $this->id)->first() !==null;
+    }
 }

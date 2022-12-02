@@ -4,7 +4,7 @@
 @foreach($post as $post)
 
 <div class="border">
-  <a href="{{route('allpost_detail',['post'=>$post['id']])}}">
+  <a href="{{route('otherpost_detail',['post'=>$post['id']])}}">
     
     <li>カテゴリー:@if($post['category_id']==0)
       GOOD
@@ -23,9 +23,9 @@
     <div>
      <a href="{{route('profile.page',['user_id'=>$post['user_id']])}}">自分のプロフィールへ</a>
     </div>
-    <div>
-      <a href="{{route('hiroba.page')}}">広場へ</a>
-    </div>
+    
+    <a href="{{route('/')}}" >MindHome</a>
+                    
     <div>
       <a href="{{route('allsearch_form')}}">検索</a>
     </div>
