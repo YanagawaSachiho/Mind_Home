@@ -15,48 +15,48 @@
 </head>
 
 <body>
-    <header class="p-3 bg-primary ">
+    <header class="p-3 bg-primary d-flex justify-content-end">
         
         @if(Auth::check())
       
-            <div class="d-flex">
-                <a href="{{route('/')}}" class="my-navbar-item bg-primary text-white ">MindHome</a>
-                
-
-                <span class="my-navbar-item bg-primary text-white rounded ">{{ Auth::user()->name}}</span>
-                
-                <a href="" id="logout" class="my-navbar-item bg-primary text-white ">ログアウト</a>
-                
-                <form id="logout-form" action="{{ route('logout')}}" method="POST" style="display: none;">
-                    @csrf
-                </form>
-                <script>
-                    document.getElementById('logout').addEventListener('click',function(event){
-                        event.preventDefault();
-                        document.getElementById('logout-form').submit();
-                    });
-                    </script>          
-          
+            
+            <div class="p-2 bd-highlight">
+            <a href="{{route('/')}}" class="text-white">HOMEへ</a>
             </div>
-       @else
-       <a class="my-navbar-item" href="{{route('login')}}">ログイン</a>
-       <a class="my-navbar-item" href="{{route('register')}}">会員登録</a>
-       @endif
-    </div>
+               
+            
+                <div class="x d-flex justify-content-end">
+                    <span class="my-navbar-item  text-white rounded bg-white text-info rounded p-1 m-1">{{ Auth::user()->name}}</span>
+                    
+                    <a href="" id="logout" class="my-navbar-item bg-white text-info rounded p-1 m-1 ">ログアウト</a>
+                    
+                    <form id="logout-form" action="{{ route('logout')}}" method="POST" style="display: none;">
+                        @csrf
+                    </form>
+                    <script>
+                        document.getElementById('logout').addEventListener('click',function(event){
+                            event.preventDefault();
+                            document.getElementById('logout-form').submit();
+                        });
+                        </script>          
+                </div>
+           @else
+           <a class="my-navbar-item" href="{{route('login')}}" class="btn">ログイン</a>
+           <a class="my-navbar-item" href="{{route('register')}}">会員登録</a>
+        </div>
+           @endif
+                
+    
 </header>
 <main class="p-2 m-auto">
-    <div id="app" class="conteiner  p-5">
+    <div id="app" class="m-auto  p-5">
         
         @yield('content')
 
     </div>
 </main>
                         
-<footer class="bg-secondary">
-    <div class="container border">               
-    @yield('footter')   
-    </div>
-</footer>
+
 
 <!-- jqueryの読み込み -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>            

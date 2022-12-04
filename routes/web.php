@@ -56,7 +56,7 @@ Route::get('/profile/{user_id}', [profileController::class,'Profile'])->name('pr
 Route::get('/edit_profile/{user}', [profileController::class,'editProfileForm'])->name('edit_profile');
 Route::post('/edit_profile/{user}', [profileController::class,'editProfile'])->name('edit_profile');
 // プロフィールページ(他人）へ
-    Route::get('/other_profile/{post}', [profileController::class,'otherProfile'])->name('other_profile.page');
+    Route::get('/other_profile/{user}', [profileController::class,'otherProfile'])->name('other_profile.page');
     
     // ブックマーク一覧
     Route::get('/bookmark', [UsersController::class,'bookmark'])->name('bookmark.page');

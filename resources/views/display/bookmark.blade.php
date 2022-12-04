@@ -22,7 +22,23 @@
     </div>
 </a>
   @endforeach
-  
+ <!-- フッター部分 -->
+ <footter class="p-5">
+    <div class="conteiner  d-flex justify-content-between  bd-highlight mb-3 bg-secondary">
+
+        <div class="p-2 bd-highlight">
+        <a href="{{route('hiroba.page')}}" class="text-white">広場へ</a>
+        </div>
+
+        <div class="p-2 bd-highlight">
+        <a href="{{route('/')}}" class="text-white">HOMEへ</a>
+        </div>
+    
+        <div class="p-2 bd-highlight">
+        <a href="{{route('create_post.form')}}" class="text-white">新規投稿</a>
+        </div>
+    </div>
+</footer>  
 
 
 

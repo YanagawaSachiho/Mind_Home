@@ -3,16 +3,18 @@
 
 <!-- 検索フォーム -->
 <div class="container text-center ">
-  <form method="get" action="{{route('search')}}">
+  <form method="get" action="{{route('search')}}" class="text-center ">
     @csrf
 
-    <div class="d-flex flex-column bd-highlight mb-">
-      <input type="text"  name="search" class="m-1">
+    <div class="d-flex flex-column bd-highlight ">
+      <label for="search">検索ワード</label><input id="search"type="text"  name="search" class="m-3 p-2">
    
-    
-      <input type="submit" value="検索する" class="w-5 m=1"> 
-  
-      <a href="{{route('/')}}" class="d-block m-1">戻る</a>     
+    <div class="">
+      <input type="submit" value="検索する" class="btn btn-info m=3"> 
+    </div>
+    <div>
+      <a href="#" onclick="history.back(-1);return false;" class="btn btn-secondary m-3">戻る</a>     
+    </div>
 </div>
 </div>
 @endsection

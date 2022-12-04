@@ -22,7 +22,10 @@ class DisplayController extends Controller
         // 投稿一覧
         // $post=new Post;
         // $all=$post->all()->toArray(); 
-        $all=Auth::user()->post->toArray();
+        $all=Auth::user()->post()
+        ->orderby('updated_at','desc')
+        ->get()
+        ->toArray();
         
         $id=Auth::user()->id;
         $name=Auth::user()->name;
@@ -48,11 +51,14 @@ class DisplayController extends Controller
 
         // 投稿詳細
      public function postDetail(Post $post){
+        
+
+        
          // ajaxの発火前の表示判断
         $mark_model=new Mark;
         $mark=$mark_model->get();
 
-       
+    //    viewでの有無判断
         $user_id=Auth::user()->id;
         $post_id=$post->id;
        
@@ -119,20 +125,16 @@ public function Hiroba(){
     $post=new Post;
     $user=new User;
     // publicが1（公開）のみを取得
-    $allpost=$post->where('public',1)->get();
+    $allpost=$post
+    ->where('public',1)
+    ->orderby('updated_at','desc')
+    ->get();
     // ログインユーザーかその他か判断のためのid取得
     $user_id=$post->user_id;
     $id=$user->get();
 
-    // foreach($user_id as $id) {
-    //     $alluser=$user->where('id',$user_id)->get();
-    // }
-
-    // var_dump($alluser);
-
-
-    // Quser_idと一致する名前を表示したい
     
+
     return view('hiroba',[
         'post'=>$allpost,
         // 'user'=>$alluser,
@@ -145,25 +147,51 @@ public function Hiroba(){
     public function OtherpostDetail(Post $post){
     
         
+    $user_id=$post->user_id;
     $myid=Auth::user()->id;
     $user=new User;
-    $user_id=$post->user_id;
 
-    $name=$user->where('id',$user_id)->get();
-    // $name=mb_convert_kana($name,"UTF-8");
-   
+    // Quser_idと一致する名前を表示したい
+    // プロフィール遷移のための投稿者のID取得
+    echo($user_id);
+    $name=User::find($user_id)->toArray();
+    $name = $name["name"];
     
+// ajaxの発火前の表示判断-----
+    $mark_model=new Mark;
+    $mark=$mark_model->get();
+    
+    //    viewでの有無判断
+    $myid=Auth::user()->id;
+    $post_id=$post->id;
+    
+       
+        $record=$mark_model
+        ->where('user_id',$myid)
+        ->where('post_id',$post_id)
+        ->first();
+        if($record==null){
+            $record=true;
+        }else{
+            $record=false;
+        }
+        var_dump($record);
 
+// ------------------
     // ログインユーザーとuser_idが一致したら編集可能画面へ
         if($user_id===$myid){
             return view('display/postdetail',[
                 'post'=>$post,
+                'user_id'=>$user_id,
                 'name'=>$name,
+                'record'=>$record,
             ]);
         }else{
             return view('display/otherpostdetail',[
                 'post'=>$post,
+                'user_id'=>$user_id,
                 'name'=>$name,
+                'record'=>$record,
             ]);
             
         }

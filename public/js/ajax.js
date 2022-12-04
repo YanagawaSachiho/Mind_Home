@@ -1,7 +1,7 @@
 $( function (){
   console.log('click');
   var mark=$('.mark-toggle');
-  var ggi=$('551');
+
   var markId;
   
   

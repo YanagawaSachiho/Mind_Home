@@ -36,20 +36,22 @@ class ProfileController extends Controller
         ]);
     }
     // ユーザープロフィール(他）]
-public function otherProfile(Post $post){
-    // postのuser_idからプロフィールを取得
-// var_dump($post);
-$user=new User;
-foreach($post as $id){
-    $user_id=$post['user_id'];
-}
-// var_dump($user_id);
+public function otherProfile(User $user){
+// ・管理画面からを視点に編集
 
-$other_user=$user->where('id',$user_id)->get();
-// var_dump($other_user);
+// ユーザー一覧以外からの遷移のためのパラメーター
+// $user_id=$user->id;
+// $post=new Post;
+// $post_id=$post
+// ->where('id',$user_id)
+// ->get();
+
+// 書き換えめんどいからそのまま変数に格納
+$other_user=$user;
 
 return view('display/otherusers',[
     'other_user'=>$other_user,
+    // 'post_id'=>$post_id,
 ]);
 }
     // ユーザープロフィール(自分)
