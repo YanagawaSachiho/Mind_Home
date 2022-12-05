@@ -7,7 +7,7 @@ return [
     | Validation Language Lines
     |--------------------------------------------------------------------------
     |
-    | The following language lines contain the default error messages used by
+    | The following language lines contzin the default error messages used by
     | the validator class. Some of these rules have multiple versions such
     | as the size rules. Feel free to tweak each of these messages here.
     |
@@ -149,7 +149,9 @@ return [
     'attributes' => [
         'name'=>'名前',
         'email'=>'メールアドレス',
-        'comment'=>'投稿内容'
+        'comment'=>'投稿内容',
+        
+        
     ],
 
 ];

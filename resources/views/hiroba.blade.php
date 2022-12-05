@@ -8,7 +8,7 @@
 <div class='container  p-2 '>
   @foreach($post as $post)
   
-    <a href="{{route('otherpost_detail',['post'=>$post['id']])}}" class="p-1">
+    <a href="{{route('otherpost_detail',['post'=>$post['id']])}}" class="p-1" style="text-decoration: none">
       <div class="p-1 border rounded-top border-info" >
 
         <div class="d-inline">
@@ -34,7 +34,7 @@
   @endforeach
   </div>
  <!-- フッター部分 -->
- <footter class="p-5">
+ <footter class="p-5 fixed-bottom">
     <div class="conteiner  d-flex justify-content-between  bd-highlight mb-3 bg-secondary">
         <div class="p-2 bd-highlight text-white">
         <a href="{{route('profile.page',['user_id'=>$post['user_id']])}}" class="text-white">自分のプロフィールへ</a>
@@ -43,7 +43,7 @@
         <a href="{{route('/')}}" class="text-white">HOMEへ</a>
         </div>
         <div class="p-2 bd-highlight">
-        <a href="{{route('search_form')}}" class="text-white">検索</a>
+        <a href="{{route('allsearch_form')}}" class="text-white">検索</a>
         </div>
         <div class="p-2 bd-highlight">
         <a href="{{route('bookmark.page')}}" class="text-white">ブックマーク一覧へ</a>

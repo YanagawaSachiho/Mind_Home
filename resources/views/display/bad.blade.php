@@ -6,7 +6,7 @@
     <a href="{{route('good.page')}}" class="text-white" >
         <div class='container  bg-secondary rounded-pill p-3'>[GOOD]</div>
     </a>
-    <h1  class="text-white"><div class='container bg-secondary rounded-pill p-3'>BADs</div></h1>
+    <h1  class="text-white"><div class='container bg-secondary rounded-pill p-3'>BAD</div></h1>
     <a href="{{route('other.page')}}" class="text-white" >
         <div class='container bg-secondary rounded-pill p-3'>[OTHER]</div>
     </a>

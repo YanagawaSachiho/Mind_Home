@@ -23,10 +23,7 @@
               <div class="p-1 border text-dark">{{$post['comment']}}</div>
                 <div class="p-1 d-flex justify-content-end">投稿日時{{$post['created_at']}}</div>
             </div>
-          <!-- もしレコードにbookmarkがあったらの記述 -->
-          <span class="bg-success    d-flex p-10">
-            <a class="mark-toggle  "   href="" data-postid="{{$post->id}}">★</a>
-          </span>
+          
         </div>
       </a>
   </div>

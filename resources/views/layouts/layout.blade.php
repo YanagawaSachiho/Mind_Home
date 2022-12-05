@@ -15,7 +15,7 @@
 </head>
 
 <body>
-    <header class="p-3 bg-primary d-flex justify-content-end">
+    <header class="p-3 bg-primary d-flex justify-content-end sticky-top">
         
         @if(Auth::check())
       

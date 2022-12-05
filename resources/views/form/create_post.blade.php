@@ -4,6 +4,15 @@
   <h1 class=" m-2 text-center">新規投稿</h2>
 
 <div class=" border text-center " >
+  @if($errors->any())
+  
+  <span class="invalid-feedback" role="alert">
+    @foreach($error as $error)
+    <strong>{{ $message }}</strong>
+    @endforeach
+    </span>
+  @endif
+  
   <form action="{{route('create_post.form')}}" method="post"  class="m-5">
   @csrf
 

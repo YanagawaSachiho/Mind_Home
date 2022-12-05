@@ -9,7 +9,7 @@
 
         <div >
          
-            <img src="{{ asset($other_user ->image) }}" style="width:100px; height:100px;" class="rounded-circle border border-4 mb-3">
+        <img src="{{ asset($other_user ->image) }}" style="width:100px; height:100px;" class="rounded-circle border border-4 mb-3">
       
         <div class="">
             <h2 class="text-center">

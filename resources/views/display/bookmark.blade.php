@@ -23,7 +23,7 @@
 </a>
   @endforeach
  <!-- フッター部分 -->
- <footter class="p-5">
+ <footter class="p-5 fixed-bottom">
     <div class="conteiner  d-flex justify-content-between  bd-highlight mb-3 bg-secondary">
 
         <div class="p-2 bd-highlight">

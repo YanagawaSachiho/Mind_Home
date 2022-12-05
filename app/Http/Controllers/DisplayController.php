@@ -19,9 +19,7 @@ class DisplayController extends Controller
     public function index(){
 
         
-        // 投稿一覧
-        // $post=new Post;
-        // $all=$post->all()->toArray(); 
+        // 投稿一覧 
         $all=Auth::user()->post()
         ->orderby('updated_at','desc')
         ->get()
@@ -30,7 +28,7 @@ class DisplayController extends Controller
         $id=Auth::user()->id;
         $name=Auth::user()->name;
         $role=Auth::user()->role;
-        var_dump($role);
+       
         if(empty($all)){
             return redirect('/create_post');
             
@@ -51,14 +49,13 @@ class DisplayController extends Controller
 
         // 投稿詳細
      public function postDetail(Post $post){
-        
-
+    
         
          // ajaxの発火前の表示判断
         $mark_model=new Mark;
         $mark=$mark_model->get();
 
-    //    viewでの有無判断
+        // viewでの有無判断
         $user_id=Auth::user()->id;
         $post_id=$post->id;
        
@@ -66,7 +63,7 @@ class DisplayController extends Controller
         ->where('user_id',$user_id)
         ->where('post_id',$post_id)
         ->first();
-        var_dump($record);
+        
         if($record==null){
             $record=true;
         }else{
@@ -90,7 +87,9 @@ class DisplayController extends Controller
      
      //  GOOD投稿一覧
     public function Good(){
-        $all=Auth::user()->post->where('category_id',0)->toArray();
+        $all=Auth::user()->post
+        ->where('category_id',0)
+        ->toArray();
         $name=Auth::user()->name;
 
         return view('display/good',
@@ -137,8 +136,6 @@ public function Hiroba(){
 
     return view('hiroba',[
         'post'=>$allpost,
-        // 'user'=>$alluser,
-        // 'name'=>$name,
     ]);
 
     }
@@ -153,7 +150,6 @@ public function Hiroba(){
 
     // Quser_idと一致する名前を表示したい
     // プロフィール遷移のための投稿者のID取得
-    echo($user_id);
     $name=User::find($user_id)->toArray();
     $name = $name["name"];
     
@@ -175,8 +171,7 @@ public function Hiroba(){
         }else{
             $record=false;
         }
-        var_dump($record);
-
+        
 // ------------------
     // ログインユーザーとuser_idが一致したら編集可能画面へ
         if($user_id===$myid){

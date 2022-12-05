@@ -8,7 +8,8 @@
     <div>
       <!-- 画像 -->
       <div>
-          <img src="{{ asset($user->image) }}" style="width:100px; height:100px;" class="rounded-circle border border-4 mb-3">
+          <img src="{{ asset($user['image']) }}" style="width:100px; height:100px;" class="rounded-circle border border-4 mb-3">
+          
           <div class="">
             <h2 class="text-center">ユーザー名：{{$user['name']}}</h2>
           </div>

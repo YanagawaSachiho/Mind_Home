@@ -20,7 +20,7 @@ class UsersController extends Controller
         // 権限分け
         // ログイン時にroleが0の場合はユーザーホーム画面にリダイレクト
         $role=Auth::user()->role;
-        echo$role;
+        
         if($role===0){
             return redirect('/');
         }else{  
@@ -133,11 +133,4 @@ public function bookmarkDelete(Post $post){
 
 }
 
-
-
-    public function Passwordreset(){
-        // 自作
-   
-        return view('auth/password');
-   }
 }

@@ -7,7 +7,7 @@
     @csrf
 
     <div class="d-flex flex-column bd-highlight ">
-      <label for="search">検索ワード</label><input id="search"type="text"  name="search" class="m-3 p-2">
+      <label for="search">検索ワード</label><input id="search"type="text"  name="search" class="m-3 p-2" value="">
    
     <div class="">
       <input type="submit" value="検索する" class="btn btn-info m=3"> 
@@ -15,6 +15,6 @@
     <div>
       <a href="#" onclick="history.back(-1);return false;" class="btn btn-secondary m-3">戻る</a>     
     </div>
-</div>
+
 </div>
 @endsection
