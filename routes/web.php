@@ -17,8 +17,6 @@ use App\Http\Controllers\ProfileController;
 Auth::routes();
 Route::group(['middleware' => 'auth'],function(){
     
-  
-    
     // ホーム
     Route::get('/',[DisplayController::class,'index'])->name('/');
     //    GOOD投稿一覧
